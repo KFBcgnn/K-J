@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Luxury Wedding Invitation</title>
+  <style>
+    :root {
+      --beige: #f3eadb;
+      --ivory: #fffdfa;
+      --gold: #b68a3d;
+      --gold-soft: #e8d6ae;
+      --ink: #4f3c22;
+      --lux-ease: cubic-bezier(0.22, 0.78, 0.2, 1);
+      --shadow-deep: 0 22px 52px rgba(69, 44, 15, 0.34);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      min-height: 100dvh;
+      min-height: -webkit-fill-available;
+      background: linear-gradient(170deg, #f9f2e6, #efdfc2 52%, #e8d6b2);
+      overflow: hidden;
+      font-family: "Georgia", "Times New Roman", serif;
+    }
+
+    .side-florals {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .floral {
+      position: absolute;
+      top: 50%;
+      width: min(220px, 24vw);
+      height: min(460px, 62vh);
+      opacity: 0.48;
+      transition: opacity 1s var(--lux-ease);
+    }
+
+    .floral svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      filter: drop-shadow(0 4px 12px rgba(120, 82, 28, 0.12));
+    }
+
+    .floral-left {
+      left: calc((100vw - min(100vw, 460px)) / 4);
+      transform: translate(-50%, -50%);
+    }
+
+    .floral-right {
+      right: calc((100vw - min(100vw, 460px)) / 4);
+      transform: translate(50%, -50%) scaleX(-1);
+    }
+
+    .floral-accent {
+      position: absolute;
+      width: min(130px, 15vw);
+      height: min(190px, 26vh);
+      opacity: 0.32;
+      pointer-events: none;
+    }
+
+    .floral-accent svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      filter: drop-shadow(0 3px 10px rgba(100, 70, 24, 0.1));
+    }
+
+    .floral-accent-lt {
+      left: calc((100vw - min(100vw, 460px)) / 4 - 48px);
+      top: 6%;
+      transform: translateX(-40%);
+    }
+
+    .floral-accent-lb {
+      left: calc((100vw - min(100vw, 460px)) / 4 - 42px);
+      bottom: 5%;
+      top: auto;
+      transform: translateX(-38%);
+    }
+
+    .floral-accent-rt {
+      right: calc((100vw - min(100vw, 460px)) / 4 - 48px);
+      top: 6%;
+      transform: translateX(40%) scaleX(-1);
+    }
+
+    .floral-accent-rb {
+      right: calc((100vw - min(100vw, 460px)) / 4 - 42px);
+      bottom: 5%;
+      top: auto;
+      transform: translateX(38%) scaleX(-1);
+    }
+
+    .floral-vignette {
+      position: absolute;
+      width: min(90px, 10vw);
+      height: min(120px, 16vh);
+      opacity: 0.22;
+    }
+
+    .floral-vignette svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .floral-v-l {
+      left: calc((100vw - min(100vw, 460px)) / 4 - 8px);
+      top: 38%;
+      transform: translateX(-55%);
+    }
+
+    .floral-v-r {
+      right: calc((100vw - min(100vw, 460px)) / 4 - 8px);
+      top: 38%;
+      transform: translateX(55%) scaleX(-1);
+    }
+
+    @media (max-width: 520px) {
+      .side-florals {
+        display: none;
+      }
+    }
+
+    .app {
+      position: fixed;
+      inset: 0;
+      min-height: 100dvh;
+      min-height: 100svh;
+      height: 100dvh;
+      height: 100svh;
+      width: 100%;
+      z-index: 2;
+      background: transparent;
+    }
+
+    .scene {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(0);
+      transition: opacity 900ms var(--lux-ease), transform 1100ms var(--lux-ease), filter 900ms var(--lux-ease), visibility 900ms;
+    }
+
+    .scene.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .frame {
+      position: relative;
+      width: min(100vw, 460px);
+      min-height: 100dvh;
+      height: 100dvh;
+      height: 100svh;
+      min-height: 100svh;
+      overflow: hidden;
+      background: linear-gradient(180deg, #fcf8ef, #f4e6cb);
+      box-shadow: 0 0 0 1px rgba(182, 138, 61, 0.22);
+    }
+
+    #scene1 .frame {
+      background: linear-gradient(170deg, #f9f2e6, #efdfc2 52%, #e8d6b2);
+    }
+
+    .hero-bg {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: -2px;
+      min-height: 100%;
+      background-image:
+        radial-gradient(circle at 24% 18%, rgba(255, 255, 255, 0.32), transparent 36%),
+        radial-gradient(circle at 76% 80%, rgba(255, 214, 139, 0.2), transparent 42%),
+        linear-gradient(rgba(22, 14, 5, 0.22), rgba(22, 14, 5, 0.22)),
+        url("envelope.jpg");
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      transform: scale(1.03);
+      animation: slowZoom 8.8s ease-in-out infinite alternate;
+      transition: transform 1200ms var(--lux-ease), opacity 900ms var(--lux-ease), filter 900ms var(--lux-ease);
+    }
+
+    .initials {
+      position: absolute;
+      inset: auto 0 50%;
+      transform: translateY(50%);
+      text-align: center;
+      z-index: 5;
+      color: #f6e7c2;
+      text-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+      letter-spacing: 0.08em;
+    }
+
+    .initials strong {
+      display: block;
+      font-size: clamp(2.6rem, 11vw, 3.4rem);
+      font-weight: 500;
+      color: #eecf92;
+    }
+
+    .initials span {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      opacity: 0.92;
+    }
+
+    .start-hint {
+      position: absolute;
+      bottom: max(24px, env(safe-area-inset-bottom));
+      left: 50%;
+      transform: translateX(-50%);
+      color: #f6e8c8;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+      animation: pulse 2.6s ease-in-out infinite;
+      white-space: nowrap;
+      z-index: 6;
+    }
+
+    .tap-layer {
+      position: absolute;
+      inset: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      z-index: 8;
+    }
+
+    #scene1.blur-fade .hero-bg {
+      filter: blur(8px);
+      opacity: 0;
+      transform: scale(1.12);
+    }
+
+    #scene2 .frame {
+      display: grid;
+      place-items: center;
+      transform-origin: center center;
+      transition: transform 2300ms cubic-bezier(0.16, 0.84, 0.24, 1), filter 2300ms cubic-bezier(0.16, 0.84, 0.24, 1), opacity 1200ms var(--lux-ease);
+    }
+
+    #scene2.zoom-in .frame {
+      transform: scale(1.1);
+      filter: blur(0.8px);
+    }
+
+    #scene2 .frame {
+      overflow: visible;
+    }
+
+    .envelope-open {
+      width: min(84vw, 360px);
+      aspect-ratio: 16 / 10;
+      position: relative;
+      overflow: visible;
+      filter: drop-shadow(0 16px 34px rgba(76, 49, 16, 0.2));
+      transform: scale(0.98);
+      transition: transform 1900ms var(--lux-ease), opacity 1100ms var(--lux-ease);
+    }
+
+    .env-body {
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fbf1de 0%, #f1ddba 58%, #e3c391 100%);
+      border: 1px solid rgba(188, 146, 78, 0.42);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 251, 242, 0.92),
+        inset 0 -10px 20px rgba(140, 96, 34, 0.2),
+        0 10px 24px rgba(108, 72, 23, 0.14);
+      overflow: hidden;
+    }
+
+    .env-body::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      box-shadow:
+        inset 0 18px 28px rgba(255, 252, 245, 0.42),
+        inset 0 -16px 24px rgba(128, 88, 31, 0.14);
+    }
+
+    .env-flap {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 58%;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      border-radius: 14px 14px 0 0;
+      background: linear-gradient(180deg, #fff7e7 0%, #efd5a6 60%, #dcb77c 100%);
+      border: 1px solid rgba(184, 142, 73, 0.44);
+      border-bottom: none;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 252, 243, 0.9),
+        inset 0 -10px 14px rgba(138, 95, 33, 0.2);
+      transform-origin: top;
+      transition: transform 2700ms cubic-bezier(0.2, 0.75, 0.2, 1);
+      z-index: 4;
+    }
+
+    .env-flap::before {
+      content: "";
+      position: absolute;
+      inset: 8% 6% auto;
+      height: 44%;
+      border-radius: 0 0 50% 50%;
+      background: radial-gradient(70% 100% at 50% 0, rgba(255, 254, 247, 0.7), transparent 70%);
+      pointer-events: none;
+    }
+
+    .env-seal {
+      position: absolute;
+      left: 50%;
+      top: 46%;
+      transform: translate(-50%, -52%);
+      width: 78px;
+      height: 94px;
+      border-radius: 0;
+      background: none;
+      border: none;
+      padding: 0 0 14px;
+      display: block;
+      z-index: 6;
+      overflow: visible;
+      transition: opacity 900ms ease;
+      filter:
+        drop-shadow(0 6px 10px rgba(55, 32, 8, 0.42))
+        drop-shadow(0 2px 4px rgba(100, 68, 22, 0.22))
+        drop-shadow(0 -1px 2px rgba(255, 248, 220, 0.35));
+    }
+
+    .env-seal .wax-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      overflow: visible;
+    }
+
+    .wax-initials {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -54%);
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: #3d2a0c;
+      text-shadow:
+        0 1px 0 rgba(255, 248, 228, 0.65),
+        0 -0.5px 0 rgba(90, 58, 18, 0.2);
+      pointer-events: none;
+      line-height: 1;
+    }
+
+    .letter-ghost {
+      position: absolute;
+      left: 7%;
+      right: 7%;
+      bottom: 6%;
+      height: 84%;
+      background: linear-gradient(180deg, rgba(255, 253, 248, 0.92), rgba(246, 234, 207, 0.78));
+      border: 1px solid rgba(204, 165, 95, 0.52);
+      border-radius: 10px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 249, 0.92);
+      transform: translateY(32%) scale(0.97);
+      transition: transform 2400ms cubic-bezier(0.2, 0.75, 0.2, 1);
+      z-index: 2;
+      overflow: visible;
+    }
+
+    .letter-rings {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -54%) rotate(-7deg);
+      width: 58px;
+      height: 38px;
+      z-index: 3;
+      pointer-events: none;
+      opacity: 0.92;
+      filter:
+        drop-shadow(0 1px 0 rgba(255, 255, 255, 0.5))
+        drop-shadow(0 2px 5px rgba(74, 58, 38, 0.18));
+    }
+
+    .letter-rings svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .envelope-open::before {
+      content: "";
+      position: absolute;
+      inset: -10% -6% auto;
+      height: 40%;
+      background: radial-gradient(55% 100% at 50% 0, rgba(255, 237, 191, 0.36), transparent 72%);
+      pointer-events: none;
+      z-index: 7;
+    }
+
+    .envelope-open::after {
+      content: "";
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      top: 50%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(147, 102, 35, 0.35), transparent);
+      pointer-events: none;
+      z-index: 6;
+    }
+
+    .envelope-open.open .env-flap {
+      transform: rotateX(186deg);
+    }
+
+    .envelope-open.open .env-seal {
+      opacity: 0;
+    }
+
+    .envelope-open.open .letter-ghost {
+      transform: translateY(-16%) scale(1);
+    }
+
+    #scene2.zoom-in .envelope-open {
+      transform: scale(1.06);
+    }
+
+    #scene4 .frame {
+      display: grid;
+      place-items: center;
+      padding: 16px 14px 96px;
+      position: relative;
+    }
+
+    .scene4-floral {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(320px, 92vw);
+      height: min(72px, 11vh);
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.38;
+    }
+
+    .scene4-floral svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      filter: drop-shadow(0 2px 8px rgba(100, 72, 28, 0.12));
+    }
+
+    .scene4-floral-top {
+      top: max(10px, env(safe-area-inset-top));
+    }
+
+    .scene4-floral-bottom {
+      bottom: max(92px, calc(env(safe-area-inset-bottom) + 76px));
+    }
+
+    .detail-panel {
+      width: min(90vw, 390px);
+      background: linear-gradient(165deg, #fffefb, #f8efdf 62%, #f4e8d3);
+      border-radius: 22px;
+      border: 1px solid rgba(182, 138, 61, 0.34);
+      box-shadow: var(--shadow-deep);
+      padding: 30px 24px 28px;
+      text-align: center;
+      color: var(--ink);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 1200ms var(--lux-ease), transform 1200ms var(--lux-ease);
+    }
+
+    #scene4.show .detail-panel {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #scene4.show .scene4-floral {
+      opacity: 0.38;
+    }
+
+    #scene4 .detail-panel {
+      position: relative;
+      z-index: 2;
+    }
+
+    #scene4 .reopen-btn {
+      position: absolute;
+      z-index: 7;
+    }
+
+    .panel-kicker {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #8e6a2f;
+      margin: 0;
+    }
+
+    .panel-title {
+      font-size: clamp(1.8rem, 8vw, 2.4rem);
+      margin: 8px 0 6px;
+      font-weight: 500;
+      color: #5a4324;
+    }
+
+    .gold-line {
+      width: 0;
+      height: 2px;
+      margin: 12px auto 16px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      transition: width 1400ms var(--lux-ease);
+      transition-delay: 360ms;
+    }
+
+    #scene4.show .gold-line {
+      width: 112px;
+    }
+
+    .fade-item {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 900ms var(--lux-ease), transform 900ms var(--lux-ease);
+    }
+
+    #scene4.show .fade-1 {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 200ms;
+    }
+
+    #scene4.show .fade-2 {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 520ms;
+    }
+
+    #scene4.show .fade-3 {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 840ms;
+    }
+
+    .label {
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #937038;
+      margin-bottom: 3px;
+    }
+
+    .value {
+      font-size: 1rem;
+      margin: 0 0 12px;
+      color: #5b4325;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+
+    .value.venue {
+      font-size: 0.92rem;
+      color: #634a29;
+    }
+
+    .reopen-btn {
+      position: absolute;
+      left: 50%;
+      bottom: max(20px, env(safe-area-inset-bottom));
+      transform: translateX(-50%);
+      border: 1px solid rgba(182, 138, 61, 0.55);
+      background: linear-gradient(180deg, #fffaf0, #f3e1be);
+      color: #6a4d23;
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(120, 81, 23, 0.2);
+      transition: transform 260ms var(--lux-ease), box-shadow 260ms var(--lux-ease), opacity 350ms var(--lux-ease);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 7;
+    }
+
+    #scene4.show .reopen-btn {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .reopen-btn:active {
+      transform: translateX(-50%) translateY(1px) scale(0.99);
+      box-shadow: 0 5px 14px rgba(120, 81, 23, 0.2);
+    }
+
+    @keyframes slowZoom {
+      from { transform: scale(1.03); }
+      to { transform: scale(1.1); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.74; transform: translateX(-50%) translateY(0); }
+      50% { opacity: 1; transform: translateX(-50%) translateY(-3px); }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="side-florals" aria-hidden="true">
+    <div class="floral floral-left">
+      <svg viewBox="0 0 160 360" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <path stroke="rgba(148,112,58,0.38)" stroke-width="1.3" d="M78 328c-10-44-2-86 10-124 14-44 36-78 52-104"/>
+        <path stroke="rgba(148,112,58,0.28)" stroke-width="1" d="M52 248c18-22 34-52 44-88M96 200c-10 28-6 58 4 82"/>
+        <path fill="rgba(188,148,88,0.28)" d="M28 210c10-6 22-4 28 6 4 8-2 18-12 20-12 2-22-8-18-22 2-6 2-4 2-4z"/>
+        <path fill="rgba(188,148,88,0.22)" d="M118 250c8-5 18-3 24 5 4 6 0 14-8 16-10 2-18-6-16-16z"/>
+        <path fill="rgba(214,180,120,0.48)" d="M44 128c14-20 36-24 50-8 12 14 8 36-10 46-18 12-44 4-50-16-4-14 4-26 10-22z"/>
+        <path fill="rgba(232,205,160,0.58)" d="M94 178c12-16 32-18 44-4 10 12 6 30-8 38-16 10-38 4-44-12-4-12 4-22 8-22z"/>
+        <path fill="rgba(198,155,95,0.42)" d="M48 228c10-14 26-16 36-6 8 10 4 24-10 30-14 8-34 2-38-12-2-10 6-14 12-12z"/>
+        <path fill="rgba(214,180,120,0.4)" d="M72 72c16-10 34-8 42 8 6 12-2 28-16 32-16 4-34-6-34-24 0-10 4-16 8-16z"/>
+        <ellipse cx="68" cy="98" rx="16" ry="11" fill="rgba(220,190,140,0.52)" transform="rotate(-22 68 98)"/>
+        <ellipse cx="108" cy="138" rx="14" ry="10" fill="rgba(210,175,115,0.48)" transform="rotate(14 108 138)"/>
+        <ellipse cx="56" cy="168" rx="12" ry="9" fill="rgba(225,198,150,0.45)" transform="rotate(-8 56 168)"/>
+        <ellipse cx="88" cy="88" rx="18" ry="12" fill="rgba(228,200,145,0.38)" transform="rotate(8 88 88)"/>
+        <path fill="rgba(200,160,100,0.35)" d="M96 52c8-6 20-4 26 4 6 10-2 22-14 24-14 2-26-8-22-22 2-8 8-8 10-6z"/>
+        <path stroke="rgba(176,138,78,0.32)" stroke-width="0.85" d="M62 162c18 10 32 4 42-8M50 208c16 8 28 4 38-6M70 118c14 8 26 2 34-10"/>
+        <circle cx="86" cy="62" r="7" fill="rgba(236,214,170,0.68)"/>
+        <circle cx="58" cy="152" r="5" fill="rgba(220,188,130,0.58)"/>
+        <circle cx="102" cy="198" r="4" fill="rgba(230,200,150,0.5)"/>
+        <path fill="rgba(170,130,78,0.26)" d="M34 178c6-2 12 0 14 8 2 8-4 14-12 12-8-2-12-12-6-18 2-2 4-2 4-2z"/>
+        <path fill="rgba(170,130,78,0.22)" d="M122 118c5-2 10 0 12 6 2 6-2 12-8 12-8 0-12-8-8-14 2-2 4-4 4-4z"/>
+      </svg>
+    </div>
+    <div class="floral floral-right">
+      <svg viewBox="0 0 160 360" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <path stroke="rgba(148,112,58,0.38)" stroke-width="1.3" d="M78 328c-10-44-2-86 10-124 14-44 36-78 52-104"/>
+        <path stroke="rgba(148,112,58,0.28)" stroke-width="1" d="M52 248c18-22 34-52 44-88M96 200c-10 28-6 58 4 82"/>
+        <path fill="rgba(188,148,88,0.28)" d="M28 210c10-6 22-4 28 6 4 8-2 18-12 20-12 2-22-8-18-22 2-6 2-4 2-4z"/>
+        <path fill="rgba(188,148,88,0.22)" d="M118 250c8-5 18-3 24 5 4 6 0 14-8 16-10 2-18-6-16-16z"/>
+        <path fill="rgba(214,180,120,0.48)" d="M44 128c14-20 36-24 50-8 12 14 8 36-10 46-18 12-44 4-50-16-4-14 4-26 10-22z"/>
+        <path fill="rgba(232,205,160,0.58)" d="M94 178c12-16 32-18 44-4 10 12 6 30-8 38-16 10-38 4-44-12-4-12 4-22 8-22z"/>
+        <path fill="rgba(198,155,95,0.42)" d="M48 228c10-14 26-16 36-6 8 10 4 24-10 30-14 8-34 2-38-12-2-10 6-14 12-12z"/>
+        <path fill="rgba(214,180,120,0.4)" d="M72 72c16-10 34-8 42 8 6 12-2 28-16 32-16 4-34-6-34-24 0-10 4-16 8-16z"/>
+        <ellipse cx="68" cy="98" rx="16" ry="11" fill="rgba(220,190,140,0.52)" transform="rotate(-22 68 98)"/>
+        <ellipse cx="108" cy="138" rx="14" ry="10" fill="rgba(210,175,115,0.48)" transform="rotate(14 108 138)"/>
+        <ellipse cx="56" cy="168" rx="12" ry="9" fill="rgba(225,198,150,0.45)" transform="rotate(-8 56 168)"/>
+        <ellipse cx="88" cy="88" rx="18" ry="12" fill="rgba(228,200,145,0.38)" transform="rotate(8 88 88)"/>
+        <path fill="rgba(200,160,100,0.35)" d="M96 52c8-6 20-4 26 4 6 10-2 22-14 24-14 2-26-8-22-22 2-8 8-8 10-6z"/>
+        <path stroke="rgba(176,138,78,0.32)" stroke-width="0.85" d="M62 162c18 10 32 4 42-8M50 208c16 8 28 4 38-6M70 118c14 8 26 2 34-10"/>
+        <circle cx="86" cy="62" r="7" fill="rgba(236,214,170,0.68)"/>
+        <circle cx="58" cy="152" r="5" fill="rgba(220,188,130,0.58)"/>
+        <circle cx="102" cy="198" r="4" fill="rgba(230,200,150,0.5)"/>
+        <path fill="rgba(170,130,78,0.26)" d="M34 178c6-2 12 0 14 8 2 8-4 14-12 12-8-2-12-12-6-18 2-2 4-2 4-2z"/>
+        <path fill="rgba(170,130,78,0.22)" d="M122 118c5-2 10 0 12 6 2 6-2 12-8 12-8 0-12-8-8-14 2-2 4-4 4-4z"/>
+      </svg>
+    </div>
+    <div class="floral-accent floral-accent-lt">
+      <svg viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <path stroke="rgba(150,115,65,0.34)" stroke-width="1" d="M50 142c-4-28 2-52 14-72"/>
+        <path fill="rgba(220,188,130,0.45)" d="M32 58c10-12 26-14 34-4 6 8 2 20-8 24-12 4-28-2-30-14-2-8 2-6 4-6z"/>
+        <path fill="rgba(236,210,165,0.5)" d="M58 32c8-10 22-12 28-2 4 8 0 18-10 20-12 2-24-6-22-16 2-6 4-4 4-2z"/>
+        <ellipse cx="44" cy="88" rx="10" ry="7" fill="rgba(210,175,120,0.4)" transform="rotate(-12 44 88)"/>
+        <circle cx="52" cy="22" r="4" fill="rgba(238,218,175,0.65)"/>
+      </svg>
+    </div>
+    <div class="floral-accent floral-accent-lb">
+      <svg viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <path stroke="rgba(150,115,65,0.34)" stroke-width="1" d="M50 8c6 32-2 58-16 78"/>
+        <path fill="rgba(220,188,130,0.45)" d="M38 98c10-12 26-14 34-4 6 8 2 20-8 24-12 4-28-2-30-14-2-8 2-6 4-6z"/>
+        <path fill="rgba(236,210,165,0.48)" d="M62 124c8-8 20-10 26-2 4 6 0 14-8 16-10 2-22-4-20-12z"/>
+        <ellipse cx="48" cy="72" rx="9" ry="6" fill="rgba(210,175,120,0.38)" transform="rotate(10 48 72)"/>
+      </svg>
+    </div>
+    <div class="floral-accent floral-accent-rt">
+      <svg viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <path stroke="rgba(150,115,65,0.34)" stroke-width="1" d="M50 142c-4-28 2-52 14-72"/>
+        <path fill="rgba(220,188,130,0.45)" d="M32 58c10-12 26-14 34-4 6 8 2 20-8 24-12 4-28-2-30-14-2-8 2-6 4-6z"/>
+        <path fill="rgba(236,210,165,0.5)" d="M58 32c8-10 22-12 28-2 4 8 0 18-10 20-12 2-24-6-22-16 2-6 4-4 4-2z"/>
+        <ellipse cx="44" cy="88" rx="10" ry="7" fill="rgba(210,175,120,0.4)" transform="rotate(-12 44 88)"/>
+        <circle cx="52" cy="22" r="4" fill="rgba(238,218,175,0.65)"/>
+      </svg>
+    </div>
+    <div class="floral-accent floral-accent-rb">
+      <svg viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <path stroke="rgba(150,115,65,0.34)" stroke-width="1" d="M50 8c6 32-2 58-16 78"/>
+        <path fill="rgba(220,188,130,0.45)" d="M38 98c10-12 26-14 34-4 6 8 2 20-8 24-12 4-28-2-30-14-2-8 2-6 4-6z"/>
+        <path fill="rgba(236,210,165,0.48)" d="M62 124c8-8 20-10 26-2 4 6 0 14-8 16-10 2-22-4-20-12z"/>
+        <ellipse cx="48" cy="72" rx="9" ry="6" fill="rgba(210,175,120,0.38)" transform="rotate(10 48 72)"/>
+      </svg>
+    </div>
+    <div class="floral-vignette floral-v-l">
+      <svg viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <path stroke="rgba(160,125,72,0.25)" stroke-width="0.9" d="M40 92V28M28 48c8-4 16-4 24 0M32 64c6-2 14-2 20 0"/>
+        <circle cx="40" cy="18" r="5" fill="rgba(228,200,145,0.42)"/>
+        <ellipse cx="24" cy="52" rx="7" ry="5" fill="rgba(218,185,125,0.32)" transform="rotate(-25 24 52)"/>
+        <ellipse cx="56" cy="56" rx="6" ry="4" fill="rgba(218,185,125,0.28)" transform="rotate(20 56 56)"/>
+      </svg>
+    </div>
+    <div class="floral-vignette floral-v-r">
+      <svg viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <path stroke="rgba(160,125,72,0.25)" stroke-width="0.9" d="M40 92V28M28 48c8-4 16-4 24 0M32 64c6-2 14-2 20 0"/>
+        <circle cx="40" cy="18" r="5" fill="rgba(228,200,145,0.42)"/>
+        <ellipse cx="24" cy="52" rx="7" ry="5" fill="rgba(218,185,125,0.32)" transform="rotate(-25 24 52)"/>
+        <ellipse cx="56" cy="56" rx="6" ry="4" fill="rgba(218,185,125,0.28)" transform="rotate(20 56 56)"/>
+      </svg>
+    </div>
+  </div>
+  <main class="app">
+    <section class="scene active" id="scene1" aria-label="Szene 1">
+      <div class="frame">
+        <div class="hero-bg"></div>
+        <div class="initials">
+          <strong>K &amp; J</strong>
+          <span>Wedding Invitation</span>
+        </div>
+        <button class="tap-layer" id="startLayer" aria-label="Start"></button>
+        <p class="start-hint">Tap to open</p>
+      </div>
+    </section>
+
+    <section class="scene" id="scene2" aria-label="Szene 2">
+      <div class="frame">
+        <div class="envelope-open" id="envelopeOpen">
+          <div class="env-body"></div>
+          <div class="letter-ghost">
+            <span class="letter-rings" aria-hidden="true" title="Zwei Eheringe">
+              <svg viewBox="0 0 120 76" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" overflow="visible">
+                <defs>
+                  <linearGradient id="ringManMetal" x1="0%" y1="20%" x2="100%" y2="80%">
+                    <stop offset="0%" stop-color="#f2ebe3"/>
+                    <stop offset="35%" stop-color="#c9bfb2"/>
+                    <stop offset="100%" stop-color="#7d7268"/>
+                  </linearGradient>
+                  <linearGradient id="ringWomanMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#fffaf2"/>
+                    <stop offset="30%" stop-color="#edd9b8"/>
+                    <stop offset="70%" stop-color="#d4b57a"/>
+                    <stop offset="100%" stop-color="#a88452"/>
+                  </linearGradient>
+                  <linearGradient id="ringDiamond" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff"/>
+                    <stop offset="35%" stop-color="#e8f8ff"/>
+                    <stop offset="55%" stop-color="#b8dce8"/>
+                    <stop offset="100%" stop-color="#f4fcff"/>
+                  </linearGradient>
+                </defs>
+                <g opacity="0.22" transform="translate(2 3)">
+                  <ellipse cx="44" cy="44" rx="21" ry="7" fill="none" stroke="#3d3228" stroke-width="5" transform="rotate(-14 44 44)"/>
+                  <ellipse cx="64" cy="41" rx="17" ry="6" fill="none" stroke="#3d3228" stroke-width="3.5" transform="rotate(11 64 41)"/>
+                </g>
+                <ellipse cx="42" cy="42" rx="21" ry="7" fill="none" stroke="url(#ringManMetal)" stroke-width="5.2" stroke-linecap="round" transform="rotate(-14 42 42)"/>
+                <ellipse cx="42" cy="42" rx="21" ry="7" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1.1" transform="rotate(-14 42 42)"/>
+                <ellipse cx="64" cy="40" rx="17" ry="5.8" fill="none" stroke="url(#ringWomanMetal)" stroke-width="3.4" stroke-linecap="round" transform="rotate(11 64 40)"/>
+                <ellipse cx="64" cy="40" rx="17" ry="5.8" fill="none" stroke="rgba(255,252,245,0.65)" stroke-width="1" transform="rotate(11 64 40)"/>
+                <g transform="rotate(11 64 40)">
+                  <polygon points="64,27.5 68.5,33.8 64,40 59.5,33.8" fill="url(#ringDiamond)" stroke="rgba(140,180,200,0.55)" stroke-width="0.4" stroke-linejoin="miter"/>
+                  <path d="M64 30 L64 38 M60 33.8 L68 33.8" stroke="rgba(255,255,255,0.9)" stroke-width="0.45" stroke-linecap="round"/>
+                  <circle cx="65.5" cy="31.5" r="1.1" fill="rgba(255,255,255,0.95)"/>
+                </g>
+              </svg>
+            </span>
+          </div>
+          <div class="env-flap"></div>
+          <div class="env-seal" aria-hidden="true">
+            <svg class="wax-svg" viewBox="-10 -6 120 124" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin meet" overflow="visible">
+              <defs>
+                <filter id="waxSoftBlur" x="-55%" y="-55%" width="210%" height="210%">
+                  <feGaussianBlur stdDeviation="0.9" result="b"/>
+                </filter>
+                <filter id="waxGlossBlur" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="1.4" result="g"/>
+                </filter>
+                <radialGradient id="waxGoldBody" cx="34%" cy="26%" r="75%">
+                  <stop offset="0%" stop-color="#fffef8"/>
+                  <stop offset="12%" stop-color="#fff3dc"/>
+                  <stop offset="32%" stop-color="#f4d896"/>
+                  <stop offset="55%" stop-color="#d4a84a"/>
+                  <stop offset="78%" stop-color="#9e6f22"/>
+                  <stop offset="100%" stop-color="#5c3a0c"/>
+                </radialGradient>
+                <radialGradient id="waxMoltenGlow" cx="40%" cy="36%" r="50%">
+                  <stop offset="0%" stop-color="rgba(255, 236, 205, 0.85)"/>
+                  <stop offset="55%" stop-color="rgba(232, 188, 110, 0.25)"/>
+                  <stop offset="100%" stop-color="rgba(255, 200, 100, 0)"/>
+                </radialGradient>
+                <radialGradient id="waxPool" cx="50%" cy="92%" r="42%">
+                  <stop offset="0%" stop-color="rgba(35, 18, 4, 0.38)"/>
+                  <stop offset="70%" stop-color="rgba(90, 52, 14, 0.12)"/>
+                  <stop offset="100%" stop-color="rgba(90, 52, 14, 0)"/>
+                </radialGradient>
+                <radialGradient id="waxInnerShade" cx="52%" cy="58%" r="48%">
+                  <stop offset="0%" stop-color="rgba(60, 32, 8, 0)"/>
+                  <stop offset="100%" stop-color="rgba(45, 22, 4, 0.28)"/>
+                </radialGradient>
+                <radialGradient id="waxGloss" cx="28%" cy="24%" r="38%">
+                  <stop offset="0%" stop-color="rgba(255, 255, 255, 0.98)"/>
+                  <stop offset="35%" stop-color="rgba(255, 248, 228, 0.55)"/>
+                  <stop offset="70%" stop-color="rgba(255, 220, 160, 0.12)"/>
+                  <stop offset="100%" stop-color="rgba(255, 255, 255, 0)"/>
+                </radialGradient>
+                <radialGradient id="waxGloss2" cx="66%" cy="32%" r="22%">
+                  <stop offset="0%" stop-color="rgba(255, 255, 255, 0.75)"/>
+                  <stop offset="100%" stop-color="rgba(255, 255, 255, 0)"/>
+                </radialGradient>
+                <radialGradient id="waxGloss3" cx="48%" cy="18%" r="15%">
+                  <stop offset="0%" stop-color="rgba(255, 255, 255, 0.55)"/>
+                  <stop offset="100%" stop-color="rgba(255, 255, 255, 0)"/>
+                </radialGradient>
+                <linearGradient id="waxRim" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="rgba(255, 250, 230, 0.65)"/>
+                  <stop offset="35%" stop-color="rgba(180, 130, 55, 0.4)"/>
+                  <stop offset="100%" stop-color="rgba(70, 42, 10, 0.5)"/>
+                </linearGradient>
+              </defs>
+              <g filter="url(#waxSoftBlur)" opacity="0.85">
+                <path
+                  fill="rgba(25, 12, 4, 0.2)"
+                  transform="translate(2.5 4)"
+                  d="M50 86C26 66 12 50 12 34c0-15 12-26 28-26 8 0 15 4 19 10 4-6 11-10 19-10 16 0 28 11 28 26 0 16-14 32-38 52L50 86z"
+                />
+              </g>
+              <path
+                fill="url(#waxGoldBody)"
+                d="M50 86C26 66 12 50 12 34c0-15 12-26 28-26 8 0 15 4 19 10 4-6 11-10 19-10 16 0 28 11 28 26 0 16-14 32-38 52L50 86z"
+              />
+              <path
+                fill="url(#waxMoltenGlow)"
+                d="M50 86C26 66 12 50 12 34c0-15 12-26 28-26 8 0 15 4 19 10 4-6 11-10 19-10 16 0 28 11 28 26 0 16-14 32-38 52L50 86z"
+              />
+              <path
+                fill="url(#waxPool)"
+                d="M50 86C26 66 12 50 12 34c0-15 12-26 28-26 8 0 15 4 19 10 4-6 11-10 19-10 16 0 28 11 28 26 0 16-14 32-38 52L50 86z"
+              />
+              <path
+                fill="url(#waxInnerShade)"
+                d="M50 86C26 66 12 50 12 34c0-15 12-26 28-26 8 0 15 4 19 10 4-6 11-10 19-10 16 0 28 11 28 26 0 16-14 32-38 52L50 86z"
+              />
+              <path
+                fill="none"
+                stroke="url(#waxRim)"
+                stroke-width="1.05"
+                stroke-linejoin="round"
+                d="M50 86C26 66 12 50 12 34c0-15 12-26 28-26 8 0 15 4 19 10 4-6 11-10 19-10 16 0 28 11 28 26 0 16-14 32-38 52L50 86z"
+              />
+              <ellipse cx="34" cy="28" rx="17" ry="12" fill="url(#waxGloss)" transform="rotate(-22 34 28)" filter="url(#waxGlossBlur)"/>
+              <ellipse cx="64" cy="34" rx="9" ry="6" fill="url(#waxGloss2)" transform="rotate(8 64 34)"/>
+              <ellipse cx="50" cy="16" rx="6" ry="4" fill="url(#waxGloss3)"/>
+              <path
+                fill="none"
+                stroke="rgba(255, 255, 255, 0.35)"
+                stroke-width="0.65"
+                stroke-linecap="round"
+                d="M22 38c10-8 22-10 32-4"
+                opacity="0.85"
+              />
+            </svg>
+            <span class="wax-initials">K &amp; J</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene" id="scene4" aria-label="Szene 4">
+      <div class="frame">
+        <div class="scene4-floral scene4-floral-top" aria-hidden="true">
+          <svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <path stroke="rgba(158,118,62,0.35)" stroke-width="1" d="M20 72c40-28 88-36 140-20s100 8 140-16"/>
+            <path fill="rgba(220,188,130,0.42)" d="M48 38c8-10 22-12 30-4 6 6 4 16-4 20-10 4-24-2-28-12-2-6 2-4 2-4z"/>
+            <path fill="rgba(232,205,160,0.48)" d="M118 32c10-8 24-10 32-2 6 6 2 16-6 18-10 2-22-4-20-12z"/>
+            <path fill="rgba(200,160,100,0.38)" d="M188 44c8-6 20-8 26 0 4 6 0 14-8 16-10 2-22-6-18-14z"/>
+            <path fill="rgba(214,180,120,0.4)" d="M258 36c6-8 18-10 24-2 4 6 0 14-8 14-8 0-18-6-16-12z"/>
+            <circle cx="88" cy="22" r="5" fill="rgba(236,214,170,0.55)"/>
+            <circle cx="160" cy="18" r="4" fill="rgba(228,200,145,0.5)"/>
+            <circle cx="228" cy="26" r="4" fill="rgba(220,188,130,0.48)"/>
+          </svg>
+        </div>
+        <div class="scene4-floral scene4-floral-bottom" aria-hidden="true">
+          <svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <path stroke="rgba(158,118,62,0.35)" stroke-width="1" d="M20 12c40 28 88 36 140 20s100-8 140 16"/>
+            <path fill="rgba(220,188,130,0.42)" d="M48 44c8 10 22 12 30 4 6-6 4-16-4-20-10-4-24 2-28 12-2 6 2 4 2 4z"/>
+            <path fill="rgba(232,205,160,0.48)" d="M118 50c10 8 24 10 32 2 6-6 2-16-6-18-10-2-22 4-20 12z"/>
+            <path fill="rgba(200,160,100,0.38)" d="M188 38c8 6 20 8 26 0 4-6 0-14-8-16-10-2-22 6-18 14z"/>
+            <path fill="rgba(214,180,120,0.4)" d="M258 46c6 8 18 10 24 2 4-6 0-14-8-14-8 0-18 6-16 12z"/>
+            <circle cx="88" cy="60" r="5" fill="rgba(236,214,170,0.55)"/>
+            <circle cx="160" cy="64" r="4" fill="rgba(228,200,145,0.5)"/>
+            <circle cx="228" cy="56" r="4" fill="rgba(220,188,130,0.48)"/>
+          </svg>
+        </div>
+        <article class="detail-panel">
+          <p class="panel-kicker fade-item fade-1">Wir heiraten</p>
+          <h1 class="panel-title fade-item fade-1">Khalil &amp; Joanna</h1>
+          <div class="gold-line"></div>
+          <p class="fade-item fade-2">Mit Freude laden wir euch ein, unseren besonderen Tag mit uns zu feiern.</p>
+          <div class="fade-item fade-3">
+            <div class="label">Datum</div>
+            <p class="value">16 August 2026</p>
+            <div class="label">Ort</div>
+            <p class="value venue">St. Dimitrios Gemeinde Koeln e.V.<br>Geranienweg 27-29, 50769 Koeln</p>
+          </div>
+        </article>
+        <button class="reopen-btn" id="reopenBtn" type="button">Nochmal oeffnen</button>
+      </div>
+    </section>
+  </main>
+
+  <audio id="bgMusic" preload="auto" loop src="song.mp3"></audio>
+  <audio id="paperSfx" preload="auto" src="paper-open.mp3"></audio>
+
+  <script>
+    const scene1 = document.getElementById("scene1");
+    const scene2 = document.getElementById("scene2");
+    const scene4 = document.getElementById("scene4");
+    const startLayer = document.getElementById("startLayer");
+    const reopenBtn = document.getElementById("reopenBtn");
+    const envelopeOpen = document.getElementById("envelopeOpen");
+    const bgMusic = document.getElementById("bgMusic");
+    const paperSfx = document.getElementById("paperSfx");
+    let started = false;
+
+    function setActive(target) {
+      [scene1, scene2, scene4].forEach((scene) => scene.classList.remove("active"));
+      target.classList.add("active");
+    }
+
+    function startReel() {
+      if (started) return;
+      started = true;
+
+      bgMusic.play().catch(() => {});
+      if (paperSfx.getAttribute("src")) {
+        paperSfx.play().catch(() => {});
+      }
+
+      scene1.classList.add("blur-fade");
+
+      setTimeout(() => {
+        setActive(scene2);
+        requestAnimationFrame(() => envelopeOpen.classList.add("open"));
+
+        setTimeout(() => {
+          scene2.classList.add("zoom-in");
+
+          setTimeout(() => {
+            setActive(scene4);
+            scene4.classList.add("show");
+          }, 900);
+        }, 3300);
+      }, 920);
+    }
+
+    function resetReel() {
+      started = false;
+      scene1.classList.remove("blur-fade");
+      scene2.classList.remove("zoom-in");
+      scene4.classList.remove("show");
+      envelopeOpen.classList.remove("open");
+      setActive(scene1);
+    }
+
+    startLayer.addEventListener("click", startReel);
+    reopenBtn.addEventListener("click", resetReel);
+  </script>
+</body>
+</html>
